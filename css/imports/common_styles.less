@@ -1,0 +1,79 @@
+.shadow_sides(@blur: 5px, @color: #888) {
+	-moz-box-shadow: 0 (@blur - 5px) @blur @color;
+	-webkit-box-shadow: 0 (@blur - 5px) @blur @color;
+	box-shadow: 0 (@blur - 5px) @blur @color;
+}
+
+.shadow(@blur: 5px, @color: #AAA) {
+	-moz-box-shadow: 0 0 @blur 15px @color;
+	-webkit-box-shadow: 0 0 @blur 15px @color;
+	box-shadow: 0 0 @blur 15px @color;
+}
+
+.shadowGlow(@blur: 5px, @color: #AAA) {
+	-moz-box-shadow: 0 0 @blur 15px @color, 0px 0px 1px 1px rgba(18, 88, 23, .38);
+	-webkit-box-shadow: 0 0 @blur 15px @color, 0px 0px 1px 1px rgba(18, 88, 23, .38);
+	box-shadow: 0 0 @blur 15px @color, 0px 0px 1px 1px rgba(18, 88, 23, .38);
+}
+
+.shadow_inset(@blur: 15px, @top: 0, @color: #CCC) {
+	-moz-box-shadow: inset 0 @top @blur 50px @color;
+	-webkit-box-shadow: inset 0 @top @blur 50px @color;
+	box-shadow: inset 0 @top @blur 50px @color;
+}
+
+.textbox(@blur: 15px, @top: 0, @color: #CCC) {
+	-moz-box-shadow: 0 @top @blur 1px @color;
+	-webkit-box-shadow: 0 @top @blur 1px @color;
+	box-shadow: 0 @top @blur 1px @color;
+}
+
+.inner_border(@border: 1px, @color: #CCC, @blur: 0) {
+	-webkit-box-shadow: inset 0 0 @blur @border @color;
+	-moz-box-shadow: inset 0 0 @blur @border @color;
+	box-shadow: inset 0 0 @blur @border @color;
+}
+
+.roundedTop(@radius: 15px) {
+	-webkit-border-top-left-radius: @radius;
+	-webkit-border-top-right-radius: @radius;
+	-o-border-top-left-radius: @radius;
+	-o-border-top-right-radius: @radius;
+	-moz-border-radius-topleft: @radius;
+	-moz-border-radius-topright: @radius;
+	border-top-left-radius: @radius;
+	border-top-right-radius: @radius;
+}
+
+.roundedBottom(@radius: 15px) {
+	-webkit-border-bottom-left-radius: @radius;
+	-webkit-border-bottom-right-radius: @radius;
+	-o-border-bottom-left-radius: @radius;
+	-o-border-bottom-right-radius: @radius;
+	-moz-border-radius-bottomleft: @radius;
+	-moz-border-radius-bottomright: @radius;
+	border-bottom-left-radius: @radius;
+	border-bottom-right-radius: @radius;
+}
+
+.roundedLeft(@radius: 15px) {
+	-webkit-border-top-left-radius: @radius;
+	-webkit-border-bottom-left-radius: @radius;
+	-o-border-top-left-radius: @radius;
+	-o-border-bottom-left-radius: @radius;
+	-moz-border-radius-topleft: @radius;
+	-moz-border-radius-bottomleft: @radius;
+	border-top-left-radius: @radius;
+	border-bottom-left-radius: @radius;
+}
+
+.roundedRight(@radius: 15px) {
+	-webkit-border-top-right-radius: @radius;
+	-webkit-border-bottom-right-radius: @radius;
+	-o-border-top-right-radius: @radius;
+	-o-border-bottom-right-radius: @radius;
+	-moz-border-radius-topright: @radius;
+	-moz-border-radius-bottomright: @radius;
+	border-top-right-radius: @radius;
+	border-bottom-right-radius: @radius;
+}

@@ -1,0 +1,81 @@
+{% if photo %}
+
+<li class="feed">
+
+	<div class="image">
+		<a href="{{ photo.original_path }}" rel="lightbox" title="my caption">
+			<img src="{{ photo.thumbnail.url }}"/>
+		</a>
+	</div>
+	<div class="info">
+		<p>{{ photo.thumbnail }}, added by
+	    	<a href="{% url 'fakebook.views.user' photo.uploadedBy %}">{{ photo.uploadedBy }}</a>
+		on {{ photo.uploadDate }}.</p>
+	</div>
+	<ul class="interactions">
+		<li>
+			{% if user.is_authenticated %}
+			<a class="closer" href="{% url 'fakebook.views.vote' photo=photo.original_path like=True %}" target="_blank">
+			{% endif %}
+				Like ({{ photo.numberOfLikes }})
+			{% if user.is_authenticated %}
+			</a>
+			{% endif %}
+		</li>
+		|
+		<li>
+			{% if user.is_authenticated %}
+			<a class="closer" href="{% url 'fakebook.views.vote' photo=photo.original_path like=False %}" target="_blank">
+			{% endif %}
+				Dislike ({{ photo.numberOfDislikes }})
+			{% if user.is_authenticated %}
+			</a>
+			{% endif %}
+		</li>
+		|
+		<li>
+			{% if user.is_authenticated %}
+			<a class="commentor" href="#">
+			{% endif %}
+				Comment ({{ photo.comments.count }})
+			{% if user.is_authenticated %}
+			</a>
+			{% endif %}
+		</li>
+	</ul>
+	<ul class="comments">
+	
+		{% for comment in photo.getComments %}
+			<li>
+				<p>
+					<a href="{% url 'fakebook.views.user' comment.username %}">{{ comment.username }}</a>
+					: {{ comment.comment }} <span class="date">({{ comment.date }})</span>
+				</p>
+			</li>
+		{% endfor %}
+	</ul>
+	
+	{% if user.is_authenticated %}
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+	
+	<!--<form action="{% url 'fakebook.views.comment' photo.original_path %}" method="post" target="_blank" onsubmit="setTimeout('location.reload()',750);">
+	{% csrf_token %}
+	<input type="text" name="comment" placeholder="Type in your comment." >
+	<input type="submit" value="Send">
+	</form>-->
+	
+	<form class="comment" action="{% url 'fakebook.views.comment' photo.original_path %}" method="post" target="_blank">
+	{% csrf_token %}
+	{{ commentForm.as_p }}
+	<input type="submit" value="Comment!" />
+	</form>
+	
+	{% endif %} 	
+</li>
+        
+{% else %}
+
+<p>Photo is not available.</p>
+    
+{% endif %}
+	

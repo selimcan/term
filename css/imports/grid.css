@@ -1,0 +1,25 @@
+.clear_ {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.alpha {
+  margin-left: 0;
+}
+.omega {
+  margin-right: 0;
+}
+.small_container {
+  float: none;
+  margin: 0 auto;
+  overflow: hidden;
+  display: block;
+}
+.row .row {
+  margin: 0 -10px;
+  width: auto;
+  display: inline-block;
+}

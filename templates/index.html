@@ -1,0 +1,118 @@
+<html>
+<head>
+	<title>FakeBook | {% block page_title %}Newsfeed{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/all.css">
+	<link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet" />
+	<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+	<script src="{{ STATIC_URL }}js/lightbox.js"></script>
+</head>
+<body>
+
+	<header>
+		<div class="texture">
+			<div id="header_inner">
+				<div id="logo">
+					<a href="{% url 'fakebook.views.index' %}">fakebook<b>home</b></a>
+				</div>
+				<div class="title">{% block title %}news<b>feed</b>{% endblock %}</div>
+				<div id="user">
+					{% if user.is_authenticated %}
+					<h6 id="greeting">Hi, {{ user.username }}!</h6>
+					<ul id="controls">
+						<li>
+							<a class="uploader" href="#">Upload</a>
+						</li>
+						|
+						<li>
+							<a href="{% url 'fakebook.views.comments' user %}">Comments</a>
+						</li>
+						|
+						<li>
+							<a class="closer" href="{% url 'fakebook.views.log_out' %}" target="_blank" onclick="setTimeout('location.reload()',750);">Logout</a>
+						</li>
+					</ul>
+					<form id="upload" action="{% url 'fakebook.views.upload' %}" method="post" enctype="multipart/form-data"  target="_blank">
+					{% csrf_token %}
+					{{ photoForm.as_p }}
+					<input type="submit" value="Upload" />
+					</form>
+					{% else %}
+<!--					<h6 id="greeting">Hi, stranger!</h6>-->
+					<form class="log_in" action="{% url 'fakebook.views.log_in' %}" method="post" target="_blank" >
+					{% csrf_token %}
+					<input type="text" name="username" placeholder="Username" >
+					<input type="password" name="password" placeholder="Password" >
+					<input type="submit" value="Login">
+					</form>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="content">
+	{% block content %}
+	
+		{% if photos %}
+		
+			<ul id="photos">
+			{% for photo in photos %}
+				{% include "photo.html" with photo=photo %}
+			{% endfor %}
+			</ul>
+			
+		{% else %}
+		
+			<p>No photos to show.</p>
+			
+		{% endif %}
+		
+	{% endblock %}
+	</div>
+	
+	<footer>
+		<div class="texture">
+			<div id="footer_inner">
+				<div class="title">fake<b>book</b></div>
+			</div>
+		</div>
+	</footer>
+	
+	<script>
+	
+	$(document).ready(function() {
+		$('body').hide();
+		$('body').fadeIn('slow');
+		$('form').submit(function(event){
+			setTimeout('location.reload()', 750);
+		});
+		
+		$('a.closer').click(function(event){
+			setTimeout('location.reload()', 750);
+		});
+		
+		$('a.uploader').click(function(event){
+			$('header').animate({height: 125}, 1500, function() {
+			    // Animation complete.
+			  });
+		});
+		
+		$('form#upload').submit(function(event){
+			$('header').animate({height: 125}, 150, function() {
+			    // Animation complete.
+			  });
+		});
+		
+		$('a.commentor').click(function(event){
+			event.preventDefault();
+			$('input').next().focus();
+		});
+		
+		$('#id_original_path').attr('placeholder', 'The URL address of the photo');
+		$('form.comment input[type=text]').attr('placeholder', 'Write your comment here.');
+	});
+	
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,66 @@
+@columnWidth: 55px;
+@gutter: 10px;
+@numberOfColumns: 12;
+
+@allColumns: @columnWidth * @numberOfColumns;
+@allGutters: (@gutter * @numberOfColumns) * 2;
+@totalWidth: @allColumns + @allGutters;
+
+.theWidth (@theColumn: 1, @theGutter: 0) {
+  width: (@columnWidth * @theColumn) + (@gutter * (@theColumn - 1) * 2);
+}
+
+.grid(@gridSpan: 1) {
+	width: (@columnWidth * @gridSpan) + (@gutter * (@gridSpan - 1) * 2);
+	margin: 0 @gutter;
+	overflow: hidden;
+	float: left;
+	display: inline;
+}
+
+.prefix(@prefix: 0) {
+	padding-left: (@columnWidth * @prefix) + (@gutter * @prefix * 2);
+}
+
+.suffix(@suffix: 0) {
+	margin-right: (@columnWidth * @suffix) + (@gutter * @suffix * 2) + @gutter;
+}
+
+.clear_ {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+.alpha {
+	margin-left: 0;
+}
+
+.omega {
+	margin-right: 0;
+}
+
+.container(@border: 0) {
+	float: none;
+	width: @totalWidth - (@border * 2);
+	border: @border solid #000;
+	margin: 0 auto;
+	overflow: hidden;
+	display: block;
+}
+
+.small_container {
+	float: none;
+	margin: 0 auto;
+	overflow: hidden;
+	display: block;
+}
+
+.row .row {
+	margin: 0 (@gutter * -1);
+	width: auto;
+	display: inline-block;
+}
